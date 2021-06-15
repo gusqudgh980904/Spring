@@ -17,7 +17,7 @@ public class MoveController {
 		
 		
 //		return "day0611/call";//ViewResolver를 사용한 forward방식 페이지 이동
-		return "redirect:http://localhost/sist/day0611/call.jsp";
+		return "redirect:http://localhost/spring_mvc/day0611/call.jsp";
 		//ViewResolver를 거치지 않고 페이지를 요청하므로 파일의 확장자를 포함한 모든 경로를 설정
 	}//useRedirect
 

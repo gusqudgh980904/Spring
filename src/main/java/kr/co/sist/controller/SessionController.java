@@ -1,9 +1,13 @@
 package kr.co.sist.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -41,5 +45,35 @@ public class SessionController {
 
 		return "day0614/use_session_c";
 	}//useSessionC
+	
+	
+	@RequestMapping(value="/day0615/set_cookie.do",method=RequestMethod.GET)
+	public String addCookie(HttpServletResponse response) {
+		
+		//쿠키를 심는 것은 키존의 코드와 같다.
+		//1.쿠키생성
+		Cookie cookie=new Cookie("name","현병호");
+		Cookie cookie2=new Cookie("age","24");
+		//2.쿠키의 파기시간 설정
+		cookie.setMaxAge(60*2);
+		cookie2.setMaxAge(60*2);
+		
+		//3.쿠키심기
+		response.addCookie(cookie);
+		response.addCookie(cookie2);
+		
+		
+		return "redirect:http://localhost/sist/index.html";
+	}//addCookie
+	
+	
+	@RequestMapping(value="/day0615/get_cookie.do",method=RequestMethod.GET)
+	public String readCookies(@CookieValue(value="name",defaultValue = "익명")String name,
+							@CookieValue(value="age",defaultValue = "0") String age) {
+		
+		System.out.println("쿠키 읽기 이름 :"+name+",나이:"+age);
+		
+		return "day0615/read_cookie";
+	}//readCookies
 	
 }

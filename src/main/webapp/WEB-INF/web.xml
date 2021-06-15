@@ -30,5 +30,18 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
+<!-- POST방식의 요청에서 한글을 처리하기 위해 filter를 사용 -->
+<filter>
+	<filter-name>cef</filter-name>
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	<init-param>
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</init-param>
+</filter>
+<filter-mapping>
+	<filter-name>cef</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
 
 </web-app>
